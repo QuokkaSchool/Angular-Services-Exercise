@@ -1,8 +1,35 @@
 <div class="container container--page">
   <h1 class="text-color">Lista pojazdów (przykład)</h1>
 
-  <div class="flex justify-content-end mb-3">
-    <p-button (click)="addVehicle()" label="Dodaj pojazd" icon="pi pi-plus" size="small"></p-button>
+  <div class="flex justify-content-end gap-2 mb-3">
+    <button
+      pButton
+      (click)="addVehicle()"
+      label="Dodaj"
+      icon="pi pi-plus"
+      class="p-button-success"
+    ></button>
+    <button
+      pButton
+      (click)="updateVehicle()"
+      label="Edytuj"
+      icon="pi pi-pencil"
+      class="p-button-info"
+    ></button>
+    <button
+      pButton
+      (click)="deleteVehicle()"
+      label="Usuń"
+      icon="pi pi-trash"
+      class="p-button-danger"
+    ></button>
+    <button
+      pButton
+      (click)="getVehicleById()"
+      label="Wyświetl po ID"
+      icon="pi pi-info-circle"
+      class="p-button-warning"
+    ></button>
   </div>
 
   <ng-container *ngIf="(vehicles$ | async) as vehicles">
@@ -32,14 +59,33 @@
 </div>
 
 <p-dialog
-  header="Dodaj pojazd"
+  header="Szczegóły pojazdu"
   [(visible)]="isDialogVisible"
   [modal]="true"
-  [style]="{ width: '50vw' }"
+  [style]="{ width: '500px' }"
   [draggable]="false"
   [resizable]="false"
 >
-  <p class="m-0">
-    Stwórz formularz dodawania/edycji pojazdu...
-  </p>
+  <dl>
+    <dt class="text-sm font-bold mb-1">ID</dt>
+    <dd class="ml-2 mb-2">{{ selectedVehicle?.id }}</dd>
+
+    <dt class="text-sm font-bold mb-1">Marka</dt>
+    <dd class="ml-2 mb-2">{{ selectedVehicle?.brand }}</dd>
+
+    <dt class="text-sm font-bold mb-1">Model</dt>
+    <dd class="ml-2 mb-2">{{ selectedVehicle?.model }}</dd>
+
+    <dt class="text-sm font-bold mb-1">Rok produkcji</dt>
+    <dd class="ml-2 mb-2">{{ selectedVehicle?.year }}</dd>
+
+    <dt class="text-sm font-bold mb-1">Numer rejestracyjny</dt>
+    <dd class="ml-2 mb-2">{{ selectedVehicle?.registrationNumber }}</dd>
+
+    <dt class="text-sm font-bold mb-1">Typ pojazdu</dt>
+    <dd class="ml-2 mb-2">{{ selectedVehicle?.type }}</dd>
+
+    <dt class="text-sm font-bold mb-1">Dostępność</dt>
+    <dd class="ml-2 mb-2">{{ selectedVehicle?.status }}</dd>
+  </dl>
 </p-dialog>
